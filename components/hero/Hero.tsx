@@ -1,3 +1,5 @@
+import SearchBar from "../search/SearchBar";
+
 export default function Hero() {
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
@@ -14,6 +16,9 @@ export default function Hero() {
         through endless lists, explore videos as interconnected stars inside an
         interactive 3D galaxy.
       </p>
+
+      <SearchBar />
+
     </section>
   );
 }
