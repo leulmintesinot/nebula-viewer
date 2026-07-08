@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Hero from "@/components/hero/Hero";
 
 export default function Home() {
   return (
@@ -7,9 +8,7 @@ export default function Home() {
       <Header />
 
       <main className="flex flex-1 items-center justify-center px-6">
-        <h2 className="text-4xl font-bold text-white">
-          Main Content Coming Soon
-        </h2>
+        <Hero />
       </main>
 
       <Footer />
