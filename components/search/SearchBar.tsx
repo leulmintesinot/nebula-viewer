@@ -12,9 +12,9 @@ export default function SearchBar() {
         className="flex-1 rounded-xl border border-slate-700 bg-slate-900 px-5 py-3 text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
       />
 
-      <button
+     <button
         type="submit"
-        className="rounded-xl bg-indigo-600 px-6 py-3 font-medium text-white transition hover:bg-indigo-500"
+        className="rounded-xl bg-indigo-600 px-7 py-3 font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-indigo-500"
       >
         Search
       </button>
