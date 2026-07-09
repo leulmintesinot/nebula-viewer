@@ -1,22 +1,47 @@
 "use client";
 
-export default function SearchBar() {
+import { FormEvent, useState } from "react";
+
+interface SearchBarProps {
+  onSearch: (query: string) => void;
+  isLoading?: boolean;
+}
+
+export default function SearchBar({
+  onSearch,
+  isLoading = false,
+}: SearchBarProps) {
+  const [query, setQuery] = useState("");
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const trimmed = query.trim();
+
+    if (!trimmed) return;
+
+    onSearch(trimmed);
+  }
+
   return (
     <form
-      className="mt-10 flex w-full max-w-2xl items-center gap-3"
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={handleSubmit}
+      className="mx-auto flex max-w-2xl gap-3"
     >
       <input
         type="text"
-        placeholder="Search for a topic..."
-        className="flex-1 rounded-xl border border-slate-700 bg-slate-900 px-5 py-3 text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+        placeholder="Search YouTube topics..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="flex-1 rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white outline-none focus:border-blue-500"
       />
 
-     <button
+      <button
         type="submit"
-        className="rounded-xl bg-indigo-600 px-7 py-3 font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-indigo-500"
+        disabled={isLoading}
+        className="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 disabled:opacity-50"
       >
-        Search
+        {isLoading ? "Searching..." : "Search"}
       </button>
     </form>
   );
