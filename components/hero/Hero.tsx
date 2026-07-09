@@ -1,6 +1,32 @@
+"use client";
+import { useState } from "react";
 import SearchBar from "../search/SearchBar";
+import VideoGrid from "@/components/video/VideoGrid";
+
+import { searchVideos } from "@/lib/api";
+import { YouTubeVideo } from "@/types/youtube";
+
 
 export default function Hero() {
+
+    const [videos, setVideos] = useState<YouTubeVideo[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    async function handleSearch(query: string) {
+      try {
+        setIsLoading(true);
+
+        const results = await searchVideos(query);
+
+        setVideos(results);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+
   return (
     <section className="mx-auto flex w-full max-w-5xl flex-col items-center text-center py-12">
       <p className="mb-4 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1 text-sm font-medium text-indigo-300">
@@ -15,7 +41,12 @@ export default function Hero() {
         Search any topic and explore YouTube videos as interconnected stars inside an immersive 3D galaxy. Discover relationships between ideas instead of scrolling through endless lists.
       </p>
 
-      <SearchBar />
+     <SearchBar
+          onSearch={handleSearch}
+          isLoading={isLoading}
+        />
+
+        <VideoGrid videos={videos} />
 
     </section>
   );
